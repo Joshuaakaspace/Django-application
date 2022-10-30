@@ -54,47 +54,10 @@
             <div class="form2">
                 <h1>Segmentation Details</h1>
                 <div>
-                    <label for="">Buyside/Sellside</label>
-                    <select multiple class="chosen-select"  id="Buyside" disabled>
-                        <option value="">Commerical & Retail Bank</option>
-                        <option value="">Investment Bank/ M&A Advisory</option>
-                        <option value="">Broker/Dealer</option>
-                        <option value="">Exchange</option>
-                        <option value="">Inter-Broker/Dealer</option>
-                        <option value="">Independent Research</option>
-                        <option value="">Clearing & Securities</option>
-                        <option value="">Asset Management & Investment Advisory</option>
-                        <option value="">Hedge Funds</option>
-                    </select>
-                    <input type="hidden" name="buy" id="buysides" disabled>
+                    <input type="text" id="EntityURL" name="entity_url" value="{{data.segmentation_details}}" disabled>
                 </div>
-                <div>
-                    <label for="">Corporate/Other</label>
-                    <select multiple class="chosen-select"  id="Corporate" disabled>
-                        <option value="">Private Equity</option>
-                        <option value="">Custody & Fund Accounting</option>
-                        <option value="">Corporate - Energy & Basic Materials</option>
-                        <option value="">Corporate - Consulting & Advisory</option>
-                        <option value="">Corporate - Technology</option>
-                        <option value="">Corporate - Other</option>
-                        <option value="">Government</option>
-                        <option value="">Academia</option>
-                    </select>
-                    <input type="hidden" name="corporate" id="corporates">
-                </div>
-                <div>
-                    <label for="">Other</label>
-                    <select multiple class="chosen-select" id="Other" disabled>
-                        <option value="Corporate - Retail">Corporate - Retail</option>
-                        <option value="Corporate - Manufacturing">Corporate - Manufacturing</option>
-                        <option value="">Wealth Management</option>
-                        <option value="">Financial Technology</option>
-                        <option value="">Designated Non-Financial Business</option>
-                    </select>
-                    <input type="hidden" name="other" id="others" >
-                </div>
+                
                 <div class="btns">
-                    <div><input type="checkbox" name="check" id="" disabled> <label for="">Unavailable</label></div>
                     <span style="display:none" id="Index">0</span>
                     <button onclick="submitdd();" type="button">Next</button>
                 </div>

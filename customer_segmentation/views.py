@@ -28,7 +28,7 @@ def index(request):
         if user is not None:
             print("in if user")
             login(request, user)
-            return redirect("updateaccount/1")
+            return redirect("updateaccount/4")
         else:
             messages = "Invalid credentials! Please try again"
             print("in else user")
@@ -45,49 +45,54 @@ def home1(request):
 def update_account(request, id):
     messages = ''
     if request.method == "POST":
-        a_number = request.POST.get('anumber','')
-        unsegmented = request.POST.get('unsegmented','')
-        entity_url = request.POST.get('entity_url','')
-        check = request.POST.get('check', '')
-        buy = request.POST.get('buy','')
+        a_number = request.POST.get('anumber',None)
+        unsegmented = request.POST.get('unsegmented',None)
+        entity_url = request.POST.get('entity_url',None)
+        check = request.POST.get('check', None)
+        buy = request.POST.get('buy', None)
+        print(unsegmented, entity_url, buy)
         account = Accounts1.objects.filter(a_number=a_number).first()
         if check:
             check = "unavailable"
         else:
             check = "available"
         if account:
-            if check == "available":
-                if buy:
-                    orgtypes = buy.split(",")
-                    while("" in orgtypes):
-                        orgtypes.remove("")
-                    length = len(orgtypes)
-                    if length >= 5:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                        account.org_type_3 = orgtypes[2]
-                        account.org_type_4 = orgtypes[3]
-                        account.org_type_5 = orgtypes[4]
-                    if length > 0 and length == 4:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                        account.org_type_3 = orgtypes[2]
-                        account.org_type_4 = orgtypes[3]
-                    if length > 0 and length == 3:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                        account.org_type_3 = orgtypes[2]
-                    if length > 0 and length == 2:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                    if length > 0 and length == 1:
-                        account.org_type_1 = orgtypes[0]
-            account.segment_source = unsegmented
-            account.last_updated = request.user
-            account.unavailable = check
-            account.entity_url = entity_url
-            account.save()
-            messages = "Data updated successfully."    
+            if unsegmented or entity_url or buy:
+                if check == "available":
+                    if buy:
+                        orgtypes = buy.split(",")
+                        while("" in orgtypes):
+                            orgtypes.remove("")
+                        length = len(orgtypes)
+                        if length >= 5:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                            account.org_type_3 = orgtypes[2]
+                            account.org_type_4 = orgtypes[3]
+                            account.org_type_5 = orgtypes[4]
+                        if length > 0 and length == 4:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                            account.org_type_3 = orgtypes[2]
+                            account.org_type_4 = orgtypes[3]
+                        if length > 0 and length == 3:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                            account.org_type_3 = orgtypes[2]
+                        if length > 0 and length == 2:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                        if length > 0 and length == 1:
+                            account.org_type_1 = orgtypes[0]
+                account.segment_source = unsegmented
+                account.last_updated = request.user
+                account.unavailable = check
+                account.entity_url = entity_url
+                account.save()
+                messages = "Data updated successfully."
+            else:
+                messages = "Please fill atleast one field."
+
     if id == 1:
         data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, ultimate_parent__icontains = "yes").first()
         serializer = DataSerializers(data)
@@ -100,6 +105,10 @@ def update_account(request, id):
         data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, oppertunity_type__gte = 1).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, oppertunity_type__gte = 1).count()
+    if id == 4:
+        data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True).first()
+        serializer = DataSerializers(data)
+        count_record = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True).count()
     count_record = count_record if count_record else None
     dataJson = serializer.data
     return render(request, 'UpdateAccount.html',  {"data" : dataJson, "count_record": count_record, "id": id, "messages": messages })
@@ -118,38 +127,40 @@ def update_unsegmented(request):
         else:
             check = "available"
         if account:
-            if check == "available":
-                if buy:
-                    orgtypes = buy.split(",")
-                    while("" in orgtypes):
-                        orgtypes.remove("")
-                    length = len(orgtypes)
-                    if length >= 5:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                        account.org_type_3 = orgtypes[2]
-                        account.org_type_4 = orgtypes[3]
-                        account.org_type_5 = orgtypes[4]
-                    if length > 0 and length == 4:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                        account.org_type_3 = orgtypes[2]
-                        account.org_type_4 = orgtypes[3]
-                    if length > 0 and length == 3:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                        account.org_type_3 = orgtypes[2]
-                    if length > 0 and length == 2:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                    if length > 0 and length == 1:
-                        account.org_type_1 = orgtypes[0]
-            account.last_updated = request.user
-            account.unavailable = check
-            account.segment_source = unsegmented
-            account.save()
-            messages = "Data updated successfully."
-        
+            if unsegmented or buy:
+                if check == "available":
+                    if buy:
+                        orgtypes = buy.split(",")
+                        while("" in orgtypes):
+                            orgtypes.remove("")
+                        length = len(orgtypes)
+                        if length >= 5:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                            account.org_type_3 = orgtypes[2]
+                            account.org_type_4 = orgtypes[3]
+                            account.org_type_5 = orgtypes[4]
+                        if length > 0 and length == 4:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                            account.org_type_3 = orgtypes[2]
+                            account.org_type_4 = orgtypes[3]
+                        if length > 0 and length == 3:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                            account.org_type_3 = orgtypes[2]
+                        if length > 0 and length == 2:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                        if length > 0 and length == 1:
+                            account.org_type_1 = orgtypes[0]
+                account.last_updated = request.user
+                account.unavailable = check
+                account.segment_source = unsegmented
+                account.save()
+                messages = "Data updated successfully."
+            else:
+                messages = "Please fill atleast one field."
     data = Accounts1.objects.filter(segment_source__isnull=True).exclude(entity_url__isnull=True).first()
     serializer = DataSerializers(data)
     dataJson = serializer.data
@@ -170,37 +181,40 @@ def update_url(request):
         else:
             check = "available"
         if account:
-            if check == "available":
-                if buy:
-                    orgtypes = buy.split(",")
-                    while("" in orgtypes):
-                        orgtypes.remove("")
-                    length = len(orgtypes)
-                    if length >= 5:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                        account.org_type_3 = orgtypes[2]
-                        account.org_type_4 = orgtypes[3]
-                        account.org_type_5 = orgtypes[4]
-                    if length > 0 and length == 4:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                        account.org_type_3 = orgtypes[2]
-                        account.org_type_4 = orgtypes[3]
-                    if length > 0 and length == 3:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                        account.org_type_3 = orgtypes[2]
-                    if length > 0 and length == 2:
-                        account.org_type_1 = orgtypes[0]
-                        account.org_type_2 = orgtypes[1]
-                    if length > 0 and length == 1:
-                        account.org_type_1 = orgtypes[0]
-            account.last_updated = request.user
-            account.unavailable = check
-            account.entity_url = entity_url
-            account.save()
-            messages = "Data updated successfully."
+            if entity_url or buy:
+                if check == "available":
+                    if buy:
+                        orgtypes = buy.split(",")
+                        while("" in orgtypes):
+                            orgtypes.remove("")
+                        length = len(orgtypes)
+                        if length >= 5:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                            account.org_type_3 = orgtypes[2]
+                            account.org_type_4 = orgtypes[3]
+                            account.org_type_5 = orgtypes[4]
+                        if length > 0 and length == 4:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                            account.org_type_3 = orgtypes[2]
+                            account.org_type_4 = orgtypes[3]
+                        if length > 0 and length == 3:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                            account.org_type_3 = orgtypes[2]
+                        if length > 0 and length == 2:
+                            account.org_type_1 = orgtypes[0]
+                            account.org_type_2 = orgtypes[1]
+                        if length > 0 and length == 1:
+                            account.org_type_1 = orgtypes[0]
+                account.last_updated = request.user
+                account.unavailable = check
+                account.entity_url = entity_url
+                account.save()
+                messages = "Data updated successfully."
+            else:
+                messages = "Please fill atleast one field."
     data = Accounts1.objects.filter(entity_url__isnull=True).exclude(segment_source__isnull=True).first()
     serializer = DataSerializers(data)
     dataJson = serializer.data

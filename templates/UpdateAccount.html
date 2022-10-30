@@ -5,7 +5,9 @@
         <div class="Main-container">
             <div style="margin-top:30px; ">
                 <ul class="Filter-Tabs">
-                    <li class="FilterTabActive" id="upaccs" ><a href="/updateaccount/1">
+                    <li id="nofilter"
+                    class="FilterTabActive"><a href="/updateaccount/4"> No Filter</a></li>
+                    <li id="upaccs" ><a href="/updateaccount/1">
                          UP ACCS
                     </a>
                     </li>
@@ -131,6 +133,8 @@
             const upaccs = document.querySelector("#upaccs");
             const exitrate = document.querySelector("#exitrate");
             const optiesaccs = document.querySelector("#optiesaccs");
+            const nofilter = document.querySelector("#nofilter");
+            nofilter.classList.remove("FilterTabActive")
             upaccs.classList.remove("FilterTabActive");
             exitrate.classList.remove("FilterTabActive");
             optiesaccs.classList.remove("FilterTabActive");
@@ -144,6 +148,11 @@
                 window.location.href.split("/").at(-1) == "3"
             ) {
                 optiesaccs.classList.add("FilterTabActive");
+            }
+            else if (
+                window.location.href.split("/").at(-1) == "4"
+            ) {
+                nofilter.classList.add("FilterTabActive");
             }
             
             // const ANumber = document.querySelector("#ANumber")
