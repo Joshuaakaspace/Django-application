@@ -1,0 +1,122 @@
+{% extends 'layout.html' %} {% block body %}
+<style>
+    .form {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .form>div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form>div>input {
+        background: #e3e6f0;
+        border: none;
+        font-size: 1.3rem;
+        padding: 0.5rem 0.2rem;
+    }
+
+    .form2 {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+    }
+    .form2 > div{
+        display: flex;
+        flex-direction: column;
+    }
+    .form2 > div > select{
+        background: #e3e6f0;
+        border: none;
+        font-size: 1.3rem;
+        padding: 0.5rem 0.2rem;
+    }
+    hr{
+        margin:4rem 0;
+    }
+    .btns{
+        align-items: baseline;
+        gap: 1rem;
+    }
+    .btns > button{
+        background: white;
+        text-align: center;
+        padding: 0.4rem;
+        font-size: 0.7rem;
+        border: 1px solid #ccc;
+        width: 5%;
+    }
+</style>
+<div style="  padding: 4rem;">
+    <div class="form">
+        <div>
+            <label for="">A number</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="">Account Status</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="">Address</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="">Country</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="">Last Updated By</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="">Segment Source</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="">Account Name</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="">SFDC Segmentation</label>
+            <input type="text">
+        </div>
+        <div>
+            <label for="">Entity URL</label>
+            <input type="text">
+        </div>
+
+
+    </div>
+    <hr>
+    <div class="form2">
+        <h1>Segmentation Details</h1>
+        <div>
+            <label for="">Buyside/Sellside</label>
+            <select name="" id="">
+                <option value="">Choose an option</option>
+            </select>
+        </div>
+        <div>
+            <label for="">Corporate/Other</label>
+            <select name="" id="">
+                <option value="">Choose an option</option>
+            </select>
+        </div>
+        <div>
+            <label for="">Other</label>
+            <select name="" id="">
+                <option value="">Choose an option</option>
+            </select>
+        </div>
+        <div class="btns">
+            <button>--Next--</button>
+            <button>Submit</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

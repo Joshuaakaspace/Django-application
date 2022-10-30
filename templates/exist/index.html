@@ -1,0 +1,37 @@
+{% extends 'layout.html' %} {% block body %}
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css"
+    integrity="sha512-RvQxwf+3zJuNwl4e0sZjQeX7kUa3o82bDETpgVCH2RiwYSZVDdFJ7N/woNigN/ldyOOoKw8584jM4plQdt8bhA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Customer Segmentation tool</h1>
+    <a
+      href="/generateReport"
+      class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+      ><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a
+    >
+  </div>
+  <div>
+    <div>
+      <ul class="Filter-Tabs">
+        <li class="FilterTabActive">
+          <i class="fa-regular fa-play"></i> UP ACCS
+        </li>
+        <li><i class="fa-regular fa-play"></i> EXIT RATE ACCS</li>
+        <li><i class="fa-regular fa-play"></i> OPTIES ACCS</li>
+        <li><i class="fa-regular fa-play"></i> RECORD COUNT</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /.container-fluid -->
+
+{% endblock %}

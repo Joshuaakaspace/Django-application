@@ -1,0 +1,174 @@
+{% extends 'layout.html' %}
+{% block body%}
+        <!-- Main Content -->
+        {% if messages %}  <script>alert("{{ messages }}")</script> {% endif %}
+        <div class="Main-container">
+        <form  action="/updateurl/" method="POST"  id="Form">
+            {% csrf_token %}
+        
+
+            <div class="form" style="margin-top:30px; ">
+                <div>
+                    <label for="">A number</label>
+                    <input type="text"  id="ANumber" name="anumber" value="{{data.a_number}}">
+                </div>
+                <div>
+                    <label for="">Account Status</label>
+                    <input type="text" id="AccountStatus" value="{{data.account_status}}" disabled>
+                </div>
+                <div>
+                    <label for="">Address</label>
+                    <input type="text" id="Address" value="{{data.address}}" disabled>
+                </div>
+                <div>
+                    <label for="">Country</label>
+                    <input type="text" id="Country" value="{{data.country}}" disabled>
+                </div>
+                <div>
+                    <label for="">Last Updated By</label>
+                    <input type="text" id="LastUpdatedBy" value="{{data.last_updated}}" disabled>
+                </div>
+                <div>
+                    <label for="">Segment Source</label>
+                    <input type="text" id="SegmentedSource" value="{{data.segment_source}}" disabled>
+                </div>
+                <div>
+                    <label for="">Account Name</label>
+                    <input type="text" id="AccountName" value="{{data.account_name}}" disabled>
+                </div>
+                <div>
+                    <label for="">SFDC Segmentation</label>
+                    <input type="text" id="SFDCSegmentation" value="{{data.org_type}}" disabled>
+                </div>
+                <div>
+                    <label for="">Entity URL</label>
+                    <input type="text" id="EntityURL" name="entity_url">
+                </div>
+
+
+            </div>
+            <hr>
+            <div class="form2">
+                <h1>Segmentation Details</h1>
+                <div>
+                    <label for="">Buyside/Sellside</label>
+                    <select multiple class="chosen-select"  id="Buyside">
+                        <option value="">Commerical & Retail Bank</option>
+                        <option value="">Investment Bank/ M&A Advisory</option>
+                        <option value="">Broker/Dealer</option>
+                        <option value="">Exchange</option>
+                        <option value="">Inter-Broker/Dealer</option>
+                        <option value="">Independent Research</option>
+                        <option value="">Clearing & Securities</option>
+                        <option value="">Asset Management & Investment Advisory</option>
+                        <option value="">Hedge Funds</option>
+                    </select>
+                    <input type="hidden" name="buy" id="buysides">
+                </div>
+                <div>
+                    <label for="">Corporate/Other</label>
+                    <select multiple class="chosen-select"  id="Corporate" >
+                        <option value="">Private Equity</option>
+                        <option value="">Custody & Fund Accounting</option>
+                        <option value="">Corporate - Energy & Basic Materials</option>
+                        <option value="">Corporate - Consulting & Advisory</option>
+                        <option value="">Corporate - Technology</option>
+                        <option value="">Corporate - Other</option>
+                        <option value="">Government</option>
+                        <option value="">Academia</option>
+                    </select>
+                    <input type="hidden" name="corporate" id="corporates">
+                </div>
+                <div>
+                    <label for="">Other</label>
+                    <select multiple class="chosen-select" id="Other" >
+                        <option value="Corporate - Retail">Corporate - Retail</option>
+                        <option value="Corporate - Manufacturing">Corporate - Manufacturing</option>
+                        <option value="">Wealth Management</option>
+                        <option value="">Financial Technology</option>
+                        <option value="">Designated Non-Financial Business</option>
+                    </select>
+                    <input type="hidden" name="other" id="others" >
+                </div>
+                <div class="btns">
+                    <div><input type="checkbox" name="check" id=""> <label for="">Unavailable</label></div>
+                    <span style="display:none" id="Index">0</span>
+                    <button onclick="submitdd();" type="button">Next</button>
+                    
+                </div>
+            </div>
+        </form>
+        </div>
+        
+        {% endblock %}
+        {% block js%}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+        <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+        
+        <script>
+            
+            $(".chosen-select").chosen({
+            no_results_text: "Oops, nothing found!"
+        })
+        </script>
+        <script>
+            // const ANumber = document.querySelector("#ANumber")
+            const Other = document.querySelector("#Other_chosen")
+            const Corporate = document.querySelector("#Corporate_chosen")
+            const Buyside = document.querySelector("#Buyside_chosen")
+            const Address = document.querySelector("#Address")
+            const Country = document.querySelector("#Country")
+            const LastUpdatedBy = document.querySelector("#LastUpdatedBy")
+            const AccountName = document.querySelector("#AccountName")
+            const SFDCSegmentation = document.querySelector("#SFDCSegmentation")
+            const EntityURL = document.querySelector("#EntityURL")
+            const AccountStatus = document.querySelector("#AccountStatus")
+            var data = JSON.parse("{{data|escapejs}}");
+            function GetData(){
+                
+                // let Index = document.querySelector("#Index")
+                // ANumber.value = data[parseInt(Index.innerText)].pk;
+                // Address.value = data[parseInt(Index.innerText)].fields.address;
+                // Country.value = data[parseInt(Index.innerText)].fields.country;
+                // LastUpdatedBy.value = data[parseInt(Index.innerText)].fields.last_updated;
+                // SegmentedSource.value = data[parseInt(Index.innerText)].fields.segment_source;
+                // AccountName.value = data[parseInt(Index.innerText)].fields.account_name;
+                // SFDCSegmentation.value = data[parseInt(Index.innerText)].fields.sfdc_segmentation;
+                // EntityURL.value = data[parseInt(Index.innerText)].fields.entity_url;
+                // AccountStatus.value = data[parseInt(Index.innerText)].fields.account_status;
+                // Index.innerText = parseInt(Index.innerText) + 1
+               
+                
+            
+            
+
+            }              
+            GetData();
+            function submitdd(){
+                var Othertext = ""
+                var Corporatetext = ""
+                var Buysidetext = ""
+               
+               for(var i=0;i<Other.children[0].children.length-1;i++){
+                Buysidetext += Other.children[0].children[i].children[0].innerText + ","
+                   console.log("sds")
+               }
+               document.querySelector("#others").value = Othertext;
+               for(var i=0;i<Corporate.children[0].children.length-1;i++){
+                Buysidetext += Corporate.children[0].children[i].children[0].innerText + ","
+                   console.log("sds")
+               }
+               document.querySelector("#corporates").value = Corporatetext;
+               for(var i=0;i<Buyside.children[0].children.length-1;i++){
+                Buysidetext += Buyside.children[0].children[i].children[0].innerText + ","
+                   console.log("sds")
+               }
+               document.querySelector("#buysides").value = Buysidetext;
+               
+           
+               document.querySelector("#Form").submit()
+            }  
+        </script>
+        {% endblock %}
+        

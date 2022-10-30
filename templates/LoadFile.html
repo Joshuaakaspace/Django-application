@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block body%}
+        <!-- Main Content -->
+        {% if messages %}  <script>alert("{{ messages }}")</script> {% endif %}
+        <div class="Main-container">
+            <h1>Customer Segmentation Tools</h1>
+            <div style="display: flex;flex-direction:column;gap:1rem;">
+                <span>Choose a CSV file</span>
+                <form class="user" action="/loadfile/" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="FileUploader">
+                    <div class="DragAndDrop">
+                        <i class="fa-regular fa-cloud-arrow-up"></i>
+                        <div>
+                            <input type="file" id="FileUploadInput" name="file1" >Choose a file for upload</input>
+                            <!-- <span>Drag and Drop files here</span>
+                            <span>Limit 200MB per file</span> -->
+                        </div>
+                    </div>
+                    <!-- <button class="btn" id="UploadBtn">Browse files</button>
+                    <input type="file" style="display: none;" id="FileUploadInput" name="file1" > -->
+                    <button class="btn" type="submit">Upload File</button>
+                </div>
+                </form>
+                
+            </div>
+        </div>
+        <script>
+            
+            
+            
+const btn = document.querySelector("#UploadBtn");
+const FileUploadInput = document.querySelector("#FileUploadInput");
+const Preview = document.querySelector("#Preview")
+btn.addEventListener("click", () => {
+  FileUploadInput.click();
+});
+FileUploadInput.addEventListener("change",()=>{
+    alert("asdasdfasd")
+})
+function SetImage() {
+    alert("ertyujk")
+      var reader = new FileReader();
+      reader.onload = () => {
+        
+        Preview.setAttribute("src", reader.result)
+      };
+      reader.readAsDataURL(FileUploadInput.files[0]);
+    }
+        </script>
+        {% endblock %}
