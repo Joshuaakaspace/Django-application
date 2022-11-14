@@ -1,9 +1,14 @@
 {% extends 'layout.html' %}
 {% block body%}
+<style>
+    .chosen-select{
+        width:100%;
+    }
+</style>
         <!-- Main Content -->
         {% if messages %}  <script>alert("{{ messages }}")</script> {% endif %}
-        <div class="Main-container">
-            <div style="margin-top:30px; ">
+        <div class="Main-container" style="margin-top:30px; ">
+            <div>
                 <ul class="Filter-Tabs">
                     <li id="nofilter"
                     class="FilterTabActive"><a href="/updateaccount/4"> No Filter</a></li>
@@ -51,7 +56,7 @@
                 </div>
                 <div>
                     <label for="">SFDC Segmentation</label>
-                    <input type="text" id="SFDCSegmentation" value="{{data.org_type}}" disabled>
+                    <input type="text" id="SFDCSegmentation" value="{{data.sfdc_segmentation}}" disabled>
                 </div>
                 <div>
                     <label for="">Entity URL</label>
@@ -60,6 +65,10 @@
                 <div>
                     <label for="">Total Count of Records</label>
                     <input type="text" id="SFDCSegmentation" value="{{count_record}}" disabled>
+                </div>
+                <div>
+                    <label for="">Last Modified</label>
+                    <input type="text" id="last_modified" value="{{data.modified}}" disabled>
                 </div>
 
 

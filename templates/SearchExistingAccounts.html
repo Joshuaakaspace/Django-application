@@ -1,5 +1,11 @@
 {% extends 'layout.html' %}
 {% block body%}
+<style>
+    .chosen-select{
+        width:100%;
+    }
+</style>
+        {% if messages %}  <script>alert("{{ messages }}")</script> {% endif %}
         <!-- Main Content -->
         <div class="Main-container">
         <form  action="/searchexisting/" method="POST"  id="Form">
@@ -12,7 +18,7 @@
                     {% if data.a_number %}
                     <input type="text"  id="ANumber" name="anumber" value="{{data.a_number}}" >
                     {% else %}
-                    <input type="text"  id="ANumber" name="anumber" >
+                    <input type="text"  name="anumber" >
                     {% endif %}
                 </div>
                 <div>
@@ -33,7 +39,7 @@
                 </div>
                 <div>
                     <label for="">Segment Source</label>
-                    <input type="text" id="SegmentedSource" name="unsegmented" value="{{data.segment_source}}" disabled>
+                    <input type="text" id="SegmentedSource" name="unsegmented" value="{{data.segment_source}}" >
                 </div>
                 <div>
                     <label for="">Account Name</label>
@@ -41,32 +47,74 @@
                 </div>
                 <div>
                     <label for="">SFDC Segmentation</label>
-                    <input type="text" id="SFDCSegmentation" value="{{data.org_type}}" disabled>
+                    <input type="text" id="SFDCSegmentation" name="sfdc_segmentation" value="{{data.sfdc_segmentation}}" >
                 </div>
                 <div>
                     <label for="">Entity URL</label>
-                    <input type="text" id="EntityURL" name="entity_url" value="{{data.entity_url}}" disabled>
+                    <input type="text" id="EntityURL" name="entity_url" value="{{data.entity_url}}" >
                 </div>
 
 
             </div>
             <hr>
             <div class="form2">
+                <div>
+                    <label for="">Segmentation Details</label>
+                    <input type="text" id="SFDCSegmentation" name="sfdc_segmentation" value="{{data.segmentation_details}}" >
+                </div>
                 <h1>Segmentation Details</h1>
                 <div>
-                    <input type="text" id="EntityURL" name="entity_url" value="{{data.segmentation_details}}" disabled>
+                    <label for="">Buyside/Sellside</label>
+                    <select multiple class="chosen-select"  id="Buyside">
+                        <option value="">Commerical & Retail Bank</option>
+                        <option value="">Investment Bank/ M&A Advisory</option>
+                        <option value="">Broker/Dealer</option>
+                        <option value="">Exchange</option>
+                        <option value="">Inter-Broker/Dealer</option>
+                        <option value="">Independent Research</option>
+                        <option value="">Clearing & Securities</option>
+                        <option value="">Asset Management & Investment Advisory</option>
+                        <option value="">Hedge Funds</option>
+                    </select>
+                    <input type="hidden" name="buy" id="buysides">
                 </div>
-                
+                <div>
+                    <label for="">Corporate/Other</label>
+                    <select multiple class="chosen-select"  id="Corporate" >
+                        <option value="">Private Equity</option>
+                        <option value="">Custody & Fund Accounting</option>
+                        <option value="">Corporate - Energy & Basic Materials</option>
+                        <option value="">Corporate - Consulting & Advisory</option>
+                        <option value="">Corporate - Technology</option>
+                        <option value="">Corporate - Other</option>
+                        <option value="">Government</option>
+                        <option value="">Academia</option>
+                    </select>
+                    <input type="hidden" name="corporate" id="corporates">
+                </div>
+                <div>
+                    <label for="">Other</label>
+                    <select multiple class="chosen-select" id="Other" >
+                        <option value="Corporate - Retail">Corporate - Retail</option>
+                        <option value="Corporate - Manufacturing">Corporate - Manufacturing</option>
+                        <option value="">Wealth Management</option>
+                        <option value="">Financial Technology</option>
+                        <option value="">Designated Non-Financial Business</option>
+                    </select>
+                    <input type="hidden" name="other" id="others" >
+                </div>
                 <div class="btns">
+                    <div><input type="checkbox" name="check" id=""> <label for="">Unavailable</label></div>
                     <span style="display:none" id="Index">0</span>
-                    <button onclick="submitdd();" type="button">Next</button>
+                    <button type="submit" name="next" value=1>Next</button>
+                    <input type="hidden" name="updated" id="updated">
+                    <button id="update" name="update" onclick="submitdd();" value=2 type="button">Update</button>
                 </div>
             </div>
         </form>
         </div>
         
-        {% endblock %}
-        {% block js%}
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
         <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
@@ -130,6 +178,7 @@
                    console.log("sds")
                }
                document.querySelector("#buysides").value = Buysidetext;
+               document.querySelector("#updated").value = 1;
                
            
                document.querySelector("#Form").submit()

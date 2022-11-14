@@ -1,8 +1,26 @@
 {% extends 'layout.html' %}
 {% block body%}
+<style>
+    .chosen-select{
+        width:100%;
+    }
+</style>
         <!-- Main Content -->
         {% if messages %}  <script>alert("{{ messages }}")</script> {% endif %}
-        <div class="Main-container">
+        <div class="Main-container" style="margin-top:30px; ">
+            <div>
+                <ul class="Filter-Tabs">
+                    <li id="nofilter"
+                    class="FilterTabActive"><a href="/updateurl/4"> No Filter</a></li>
+                    <li id="upaccs" ><a href="/updateurl/1">
+                         UP ACCS
+                    </a>
+                    </li>
+                    <li id="exitrate"><a href="/updateurl/2"> EXIT RATE ACCS</a></li>
+                    <li id="optiesaccs"><a href="/updateurl/3"> OPTIES ACCS
+                    </a></li>
+                </ul>
+            </div>
         <form  action="/updateurl/" method="POST"  id="Form">
             {% csrf_token %}
         
@@ -38,11 +56,19 @@
                 </div>
                 <div>
                     <label for="">SFDC Segmentation</label>
-                    <input type="text" id="SFDCSegmentation" value="{{data.org_type}}" disabled>
+                    <input type="text" id="SFDCSegmentation" value="{{data.sfdc_segmentation}}" disabled>
                 </div>
                 <div>
                     <label for="">Entity URL</label>
                     <input type="text" id="EntityURL" name="entity_url">
+                </div>
+                <div>
+                    <label for="">Total Count of Records</label>
+                    <input type="text" id="totalcount" value="{{count_record}}" disabled>
+                </div>
+                <div>
+                    <label for="">Last Modified</label>
+                    <input type="text" id="last_modified" value="{{data.modified}}" disabled>
                 </div>
 
 
@@ -114,6 +140,30 @@
         </script>
         <script>
             // const ANumber = document.querySelector("#ANumber")
+            const upaccs = document.querySelector("#upaccs");
+            const exitrate = document.querySelector("#exitrate");
+            const optiesaccs = document.querySelector("#optiesaccs");
+            const nofilter = document.querySelector("#nofilter");
+            nofilter.classList.remove("FilterTabActive")
+            upaccs.classList.remove("FilterTabActive");
+            exitrate.classList.remove("FilterTabActive");
+            optiesaccs.classList.remove("FilterTabActive");
+            if (window.location.href.split("/").at(-1) == "1") {
+                    upaccs.classList.add("active");
+            } else if (
+                window.location.href.split("/").at(-1) == "2"
+            ) {
+                exitrate.classList.add("FilterTabActive");
+            } else if (
+                window.location.href.split("/").at(-1) == "3"
+            ) {
+                optiesaccs.classList.add("FilterTabActive");
+            }
+            else if (
+                window.location.href.split("/").at(-1) == "4"
+            ) {
+                nofilter.classList.add("FilterTabActive");
+            }
             const Other = document.querySelector("#Other_chosen")
             const Corporate = document.querySelector("#Corporate_chosen")
             const Buyside = document.querySelector("#Buyside_chosen")

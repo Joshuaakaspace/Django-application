@@ -124,9 +124,10 @@ hr{
     min-width: 95px;
 }
 .Main-container{
-    padding: 1rem;
+    padding: 0rem;
     width: 80%;
     margin: 0 auto;
+    overflow-x:hidden;
 }
 
 .Filter-Tabs{
