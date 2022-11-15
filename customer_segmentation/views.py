@@ -188,7 +188,7 @@ def update_unsegmented(request, id):
 
     count_record = count_record if count_record else None
     dataJson = serializer.data
-    return render(request, 'UpdateUnsegmented.html', {"data" : dataJson, "messages": messages, "count_record": count_record })
+    return render(request, 'UpdateUnsegmented.html', {"data" : dataJson, "messages": messages, "id": id, "count_record": count_record })
 
 
 @login_required
@@ -257,7 +257,7 @@ def update_url(request, id):
         count_record = Accounts1.objects.filter(entity_url__isnull=True).exclude(segment_source__isnull=True).count()
     count_record = count_record if count_record else None
     dataJson = serializer.data
-    return render(request, 'UpdateUrl.html', {"data": dataJson, "messages": messages, "count_record": count_record})
+    return render(request, 'UpdateUrl.html', {"data": dataJson, "messages": messages, "id": id, "count_record": count_record})
 
 @login_required
 def search_existing(request):

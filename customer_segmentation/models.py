@@ -58,7 +58,7 @@ class Accounts2(models.Model):
     segment_source = models.CharField(max_length=300, null=True, blank=True, default=None)
     entity_url = models.CharField(max_length=300, null=True, blank=True, default=None)
     unavailable = models.CharField(max_length=300, null=True, blank=True, default="")
-    modified = models.DateTimeField(verbose_name='date_modified', auto_now=True)
+    modified = models.DateTimeField(verbose_name='date_modified', auto_now=True, null=True, blank=True)
 
     def __str__(self):
         return self.a_number
