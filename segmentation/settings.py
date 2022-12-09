@@ -83,17 +83,23 @@ WSGI_APPLICATION = 'segmentation.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django_snowflake',
+#         'NAME': 'TESTING',
+#         'USER': 'JOSHUAIOTE89',
+#         'WAREHOUSE': 'HTR',
+#         'SCHEMA': 'PUBLIC',
+#         'PASSWORD': 'Mastercard123*',
+#         'ACCOUNT': 'to44354.central-india.azure',
+#
+#     },
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django_snowflake',
-        'NAME': 'TESTING',
-        'USER': 'JOSHUAIOTE89',
-        'WAREHOUSE': 'HTR',
-        'SCHEMA': 'PUBLIC',
-        'PASSWORD': 'Mastercard123*',
-        'ACCOUNT': 'to44354.central-india.azure',
-
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # Password validation

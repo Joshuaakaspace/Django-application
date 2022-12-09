@@ -86,6 +86,8 @@ a{
     border: none;
     font-size: 0.9rem;
     padding: 0.5rem 0.2rem;
+    box-shadow: 2px 5px #888888;
+    border-radius: 5px;
 }
 
 .form2 {
@@ -113,6 +115,7 @@ hr{
 .btns{
     align-items: baseline;
     gap: 1rem;
+    box-shadow: 2px 5px #888888;
 }
 .btns > button{
     background: white;
@@ -122,6 +125,7 @@ hr{
     border: 1px solid #ccc;
     width: 5%;
     min-width: 95px;
+    box-shadow: 2px 5px #888888;
 }
 .Main-container{
     padding: 0rem;
@@ -152,6 +156,7 @@ hr{
     background: blue;
     color: white;
     font-weight: bold;
+    padding: 7px;
   }
 
   .FileUploader{
@@ -185,4 +190,12 @@ padding: 0.1rem 1.5rem;
 border: 1px solid #ccc;
 border-radius: 6px;
 background: white;
+}
+.corners{
+  background: blue
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
 }

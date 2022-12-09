@@ -5,74 +5,99 @@
         width:100%;
     }
 </style>
+<div style="border-radius: 25px;position: fixed;
+  right: 50px; top:100px;display: flex;
+    flex-direction: column;">
+                    <label for="">Total records</label>
+                    <div style="border-color:blue;border: 2px solid blue; text-align: center; border-radius: 25px;">{{count_record}}</div>
+                </div>
+<div style="border-radius: 25px;position: fixed;
+  right: 50px; top:300px;display: flex;
+    flex-direction: column;">
+<!--    <div style="background: blue;-->
+<!--    color: white;-->
+<!--    font-weight: 800; border-radius: 25px; padding: 3px; text-align:center" >Filters</div>-->
+
+                    <button id="nofilter"
+                    class="FilterTabActive"><a href="/updateurl/4"> No Filter</a></button>
+                    <button id="upaccs" ><a href="/updateurl/1">
+                         UP ACCS
+                    </a>
+                    </button>
+                    <button id="exitrate"><a href="/updateurl/2"> EXIT RATE ACCS</a></button>
+                    <button id="optiesaccs"><a href="/updateurl/3"> OPTIES ACCS
+                    </a></button>
+</div>
         <!-- Main Content -->
         {% if messages %}  <script>alert("{{ messages }}")</script> {% endif %}
         <div class="Main-container" style="margin-top:30px; ">
-            <div>
-                <ul class="Filter-Tabs">
-                    <li id="nofilter"
-                    class="FilterTabActive"><a href="/updateurl/4"> No Filter</a></li>
-                    <li id="upaccs" ><a href="/updateurl/1">
-                         UP ACCS
-                    </a>
-                    </li>
-                    <li id="exitrate"><a href="/updateurl/2"> EXIT RATE ACCS</a></li>
-                    <li id="optiesaccs"><a href="/updateurl/3"> OPTIES ACCS
-                    </a></li>
-                </ul>
-            </div>
+<!--            <div>-->
+<!--                <ul class="Filter-Tabs">-->
+<!--                    <li id="nofilter"-->
+<!--                    class="FilterTabActive"><a href="/updateurl/4"> No Filter</a></li>-->
+<!--                    <li id="upaccs" ><a href="/updateurl/1">-->
+<!--                         UP ACCS-->
+<!--                    </a>-->
+<!--                    </li>-->
+<!--                    <li id="exitrate"><a href="/updateurl/2"> EXIT RATE ACCS</a></li>-->
+<!--                    <li id="optiesaccs"><a href="/updateurl/3"> OPTIES ACCS-->
+<!--                    </a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
         <form  action="/updateurl/{{id}}" method="POST"  id="Form">
             {% csrf_token %}
         
 
-            <div class="form" style="margin-top:30px; ">
+            <div class="form" >
                 <div>
                     <label for="">A number</label>
-                    <input type="text"  id="ANumber" name="anumber" value="{{data.a_number}}">
+                    <input type="text"  id="ANumber" name="anumber" value="{{data.a_number}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;">
                 </div>
                 <div>
                     <label for="">Account Status</label>
-                    <input type="text" id="AccountStatus" value="{{data.account_status}}" disabled>
-                </div>
-                <div>
-                    <label for="">Address</label>
-                    <input type="text" id="Address" value="{{data.address}}" disabled>
-                </div>
-                <div>
-                    <label for="">Country</label>
-                    <input type="text" id="Country" value="{{data.country}}" disabled>
-                </div>
-                <div>
-                    <label for="">Last Updated By</label>
-                    <input type="text" id="LastUpdatedBy" value="{{data.last_updated}}" disabled>
-                </div>
-                <div>
-                    <label for="">Segment Source</label>
-                    <input type="text" id="SegmentedSource" value="{{data.segment_source}}" disabled>
-                </div>
-                <div>
-                    <label for="">Account Name</label>
-                    <input type="text" id="AccountName" value="{{data.account_name}}" disabled>
-                </div>
-                <div>
-                    <label for="">SFDC Segmentation</label>
-                    <input type="text" id="SFDCSegmentation" value="{{data.sfdc_segmentation}}" disabled>
-                </div>
-                <div>
-                    <label for="">Entity URL</label>
-                    <input type="text" id="EntityURL" name="entity_url">
-                </div>
-                <div>
-                    <label for="">Total Count of Records</label>
-                    <input type="text" id="totalcount" value="{{count_record}}" disabled>
+                    <input type="text" id="AccountStatus" value="{{data.account_status}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
                 </div>
                 <div>
                     <label for="">Last Modified</label>
-                    <input type="text" id="last_modified" value="{{data.modified}}" disabled>
+                    <input type="text" id="last_modified" value="{{data.modified}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
+                </div>
+                <div>
+                    <label for="">Country</label>
+                    <input type="text" id="Country" value="{{data.country}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
+                </div>
+                <div>
+                    <label for="">Last Updated By</label>
+                    <input type="text" id="LastUpdatedBy" value="{{data.last_updated}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
+                </div>
+                <div>
+                    <label for="">Segment Source</label>
+                    <input type="text" id="SegmentedSource" value="{{data.segment_source}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
+                </div>
+                <div>
+                    <label for="">Account Name</label>
+                    <input type="text" id="AccountName" value="{{data.account_name}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
+                </div>
+                <div>
+                    <label for="">SFDC Segmentation</label>
+                    <input type="text" id="SFDCSegmentation" value="{{data.sfdc_segmentation}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
+                </div>
+                <div>
+                    <label for="">Entity URL</label>
+                    <input type="text" id="EntityURL" name="entity_url" style="border-radius: 5px; box-shadow: 2px 5px #888888;">
                 </div>
 
 
+
+
             </div>
+            <div style="margin-top:10px; display: flex;
+    flex-direction: column;">
+                    <label for="">Address</label>
+                    <input type="text" id="Address" value="{{data.address}}" style="border-radius: 5px; width:500px; box-shadow: 2px 5px #888888; background: #e3e6f0;
+    border: none;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.2rem;" disabled>
+                </div>
             <hr>
             <div class="form2">
                 <h1>Segmentation Details</h1>

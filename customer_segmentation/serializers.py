@@ -1,4 +1,4 @@
-from .models import Accounts1, Accounts2
+from .models import Accounts1
 from rest_framework import serializers
 
 class DataSerializers(serializers.ModelSerializer):

@@ -16,46 +16,54 @@
                 <div>
                     <label for="">A number</label>
                     {% if data.a_number %}
-                    <input type="text"  id="ANumber" name="anumber" value="{{data.a_number}}" >
+                    <input type="text"  id="ANumber" name="anumber" value="{{data.a_number}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" >
                     {% else %}
-                    <input type="text"  name="anumber" >
+                    <input type="text"  name="anumber" style="border-radius: 5px; box-shadow: 2px 5px #888888;">
                     {% endif %}
                 </div>
                 <div>
                     <label for="">Account Status</label>
-                    <input type="text" id="AccountStatus" value="{{data.account_status}}" disabled>
+                    <input type="text" id="AccountStatus" value="{{data.account_status}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
                 </div>
                 <div>
-                    <label for="">Address</label>
-                    <input type="text" id="Address" value="{{data.address}}" disabled>
+                    <label for="">Last Modified</label>
+                    <input type="text" id="last_modified" value="{{data.modified}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
                 </div>
                 <div>
                     <label for="">Country</label>
-                    <input type="text" id="Country" value="{{data.country}}" disabled>
+                    <input type="text" id="Country" value="{{data.country}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
                 </div>
                 <div>
                     <label for="">Last Updated By</label>
-                    <input type="text" id="LastUpdatedBy" value="{{data.last_updated}}" disabled>
+                    <input type="text" id="LastUpdatedBy" value="{{data.last_updated}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
                 </div>
                 <div>
                     <label for="">Segment Source</label>
-                    <input type="text" id="SegmentedSource" name="unsegmented" value="{{data.segment_source}}" >
+                    <input type="text" id="SegmentedSource" name="unsegmented" value="{{data.segment_source}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" >
                 </div>
                 <div>
                     <label for="">Account Name</label>
-                    <input type="text" id="AccountName" value="{{data.account_name}}" disabled>
+                    <input type="text" id="AccountName" value="{{data.account_name}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;" disabled>
                 </div>
                 <div>
                     <label for="">SFDC Segmentation</label>
-                    <input type="text" id="SFDCSegmentation" name="sfdc_segmentation" value="{{data.sfdc_segmentation}}" >
+                    <input type="text" id="SFDCSegmentation" name="sfdc_segmentation" style="border-radius: 5px; box-shadow: 2px 5px #888888;" value="{{data.sfdc_segmentation}}" >
                 </div>
                 <div>
                     <label for="">Entity URL</label>
-                    <input type="text" id="EntityURL" name="entity_url" value="{{data.entity_url}}" >
+                    <input type="text" id="EntityURL" name="entity_url" value="{{data.entity_url}}" style="border-radius: 5px; box-shadow: 2px 5px #888888;">
                 </div>
 
 
             </div>
+            <div style="margin-top:10px; display: flex;
+    flex-direction: column;">
+                    <label for="">Address</label>
+                    <input type="text" id="Address" value="{{data.address}}" style="border-radius: 5px; width:500px; box-shadow: 2px 5px #888888; background: #e3e6f0;
+    border: none;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.2rem;" disabled>
+                </div>
             <hr>
             <div class="form2">
                 <div>

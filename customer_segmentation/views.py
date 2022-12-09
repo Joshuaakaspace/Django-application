@@ -2,7 +2,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import render, redirect, HttpResponse
 from django.http import HttpResponse
 from math import ceil
-from .models import Accounts1, Accounts2
+from .models import Accounts1
 from django.contrib import messages
 import json
 import datetime
@@ -14,6 +14,7 @@ from django.forms.models import model_to_dict
 from django.core import serializers
 from .serializers import DataSerializers
 from django.db.models import Q
+import random
 
 
 # Create your views here.
@@ -45,6 +46,7 @@ def home1(request):
 @login_required
 def update_account(request, id):
     messages = ''
+    dataJson = ""
     if request.method == "POST":
         a_number = request.POST.get('anumber',None)
         unsegmented = request.POST.get('unsegmented',None)
@@ -95,23 +97,54 @@ def update_account(request, id):
                 messages = "Please fill atleast one field."
 
     if id == 1:
-        data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, ultimate_parent__icontains = "yes").first()
+        data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, ultimate_parent__icontains = "yes")
+        print("data", data)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True,
+                                            ultimate_parent__icontains="yes").first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, ultimate_parent__icontains = "yes").count()
     if id == 2:
-        data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, exit_rate_usd__gte = 1).first()
+        data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, exit_rate_usd__gte = 1)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, exit_rate_usd__gte = 1).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, exit_rate_usd__gte = 1).count()
     if id == 3:
-        data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, oppertunity_type__gte = 1).first()
+        data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, oppertunity_type__gte = 1)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True,
+                                            oppertunity_type__gte=1).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True, oppertunity_type__gte = 1).count()
     if id == 4:
-        data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True).first()
+        data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(entity_url__isnull=True, segment_source__isnull=True).count()
     count_record = count_record if count_record else None
-    dataJson = serializer.data
+    dataJson = serializer.data if serializer.data else None
     return render(request, 'UpdateAccount.html',  {"data": dataJson, "count_record": count_record, "id": id, "messages": messages})
 
 @login_required
@@ -165,24 +198,61 @@ def update_unsegmented(request, id):
     # data = Accounts1.objects.filter(segment_source__isnull=True).exclude(entity_url__isnull=True).first()
     if id == 1:
         data = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(ultimate_parent__icontains="yes") | Q(sfdc_segmentation='Unavailable') | Q(sfdc_segmentation__isnull=True)).exclude(
-            entity_url__isnull=True).first()
+            entity_url__isnull=True)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(ultimate_parent__icontains="yes") | Q(
+                sfdc_segmentation='Unavailable') | Q(sfdc_segmentation__isnull=True)).exclude(
+                entity_url__isnull=True).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(ultimate_parent__icontains="yes") | Q(sfdc_segmentation='Unavailable') | Q(sfdc_segmentation__isnull=True)).exclude(
             entity_url__isnull=True).count()
     if id == 2:
         data = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(exit_rate_usd__gte=1) | Q(sfdc_segmentation='Unavailable') | Q(sfdc_segmentation__isnull=True)).exclude(
-            entity_url__isnull=True).first()
+            entity_url__isnull=True)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(
+                Q(segment_source__isnull=True) | Q(exit_rate_usd__gte=1) | Q(sfdc_segmentation='Unavailable') | Q(
+                    sfdc_segmentation__isnull=True)).exclude(
+                entity_url__isnull=True).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(exit_rate_usd__gte=1) | Q(sfdc_segmentation='Unavailable') | Q(sfdc_segmentation__isnull=True)).exclude(
             entity_url__isnull=True).count()
     if id == 3:
         data = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(oppertunity_type__gte=1) | Q(sfdc_segmentation='Unavailable') | Q(sfdc_segmentation__isnull=True)).exclude(
-            entity_url__isnull=True).first()
+            entity_url__isnull=True)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(
+                Q(segment_source__isnull=True) | Q(oppertunity_type__gte=1) | Q(sfdc_segmentation='Unavailable') | Q(
+                    sfdc_segmentation__isnull=True)).exclude(
+                entity_url__isnull=True).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(oppertunity_type__gte=1) | Q(sfdc_segmentation='Unavailable') | Q(sfdc_segmentation__isnull=True)).exclude(
             entity_url__isnull=True).count()
     if id == 4:
-        data = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(sfdc_segmentation='Unavailable') | Q(sfdc_segmentation__isnull=True)).exclude(entity_url__isnull=True).first()
+        data = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(sfdc_segmentation='Unavailable') | Q(sfdc_segmentation__isnull=True)).exclude(entity_url__isnull=True)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(sfdc_segmentation='Unavailable') | Q(
+                sfdc_segmentation__isnull=True)).exclude(entity_url__isnull=True).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(Q(segment_source__isnull=True) | Q(sfdc_segmentation='Unavailable') | Q(sfdc_segmentation__isnull=True)).exclude(entity_url__isnull=True).count()
 
@@ -240,19 +310,50 @@ def update_url(request, id):
             else:
                 messages = "Please fill atleast one field."
     if id == 1:
-        data = Accounts1.objects.filter(entity_url__isnull=True, ultimate_parent__icontains="yes").exclude(segment_source__isnull=True).first()
+        data = Accounts1.objects.filter(entity_url__isnull=True, ultimate_parent__icontains="yes").exclude(segment_source__isnull=True)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(entity_url__isnull=True, ultimate_parent__icontains="yes").exclude(
+                segment_source__isnull=True).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(entity_url__isnull=True, ultimate_parent__icontains="yes").exclude(segment_source__isnull=True).count()
     if id == 2:
-        data = Accounts1.objects.filter(entity_url__isnull=True, exit_rate_usd__gte = 1).exclude(segment_source__isnull=True).first()
+        data = Accounts1.objects.filter(entity_url__isnull=True, exit_rate_usd__gte = 1).exclude(segment_source__isnull=True)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(entity_url__isnull=True, exit_rate_usd__gte=1).exclude(
+                segment_source__isnull=True).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(entity_url__isnull=True, exit_rate_usd__gte = 1).exclude(segment_source__isnull=True).count()
     if id == 3:
-        data = Accounts1.objects.filter(entity_url__isnull=True,  oppertunity_type__gte=1).exclude(segment_source__isnull=True).first()
+        data = Accounts1.objects.filter(entity_url__isnull=True,  oppertunity_type__gte=1).exclude(segment_source__isnull=True)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(entity_url__isnull=True, oppertunity_type__gte=1).exclude(
+                segment_source__isnull=True).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(entity_url__isnull=True, oppertunity_type__gte=1).exclude(segment_source__isnull=True).count()
     if id == 4:
-        data = Accounts1.objects.filter(entity_url__isnull=True).exclude(segment_source__isnull=True).first()
+        data = Accounts1.objects.filter(entity_url__isnull=True).exclude(segment_source__isnull=True)
+        if len(data) > 1:
+            print("length", len(data))
+            random_number = random.randint(0, len(data) - 1)
+            data = data[random_number]
+            print("data", data)
+        else:
+            data = Accounts1.objects.filter(entity_url__isnull=True).exclude(segment_source__isnull=True).first()
         serializer = DataSerializers(data)
         count_record = Accounts1.objects.filter(entity_url__isnull=True).exclude(segment_source__isnull=True).count()
     count_record = count_record if count_record else None
@@ -287,9 +388,6 @@ def search_existing(request):
                 messages = "No Data Found."
         elif update_button:
             account = Accounts1.objects.filter(a_number=a_number).first()
-            if not account:
-                no_account = True
-                account = Accounts2.objects.filter(a_number=a_number).first()
             if account:
                 if check:
                     check = "unavailable"
@@ -331,29 +429,29 @@ def search_existing(request):
                     if unsegmented:
                         account.segment_source = unsegmented
                     account.save()
-                    if no_account:
-                        account1 = Accounts1()
-                        account1.modified = account.modified
-                        account1.account_name = account.account_name
-                        account1.unavailable = account.unavailable
-                        account1.entity_url = account.entity_url
-                        account1.segment_source = account.segment_source
-                        account1.last_updated = account.last_updated
-                        account1.org_type_5 = account.org_type_5
-                        account1.org_type_4 = account.org_type_4
-                        account1.org_type_3 = account.org_type_3
-                        account1.org_type_2 = account.org_type_2
-                        account1.org_type_1 = account.org_type_1
-                        account1.sfdc_segmentation = account.sfdc_segmentation
-                        account1.ultimate_parent = account.ultimate_parent
-                        account1.oppertunity_type = account.oppertunity_type
-                        account1.exit_rate_usd = account.exit_rate_usd
-                        account1.exit_rate = account.exit_rate
-                        account1.country = account.country
-                        account1.address = account.address
-                        account1.a_number = account.a_number
-                        account1.account_status = account.account_status
-                        account1.save()
+                    # if no_account:
+                    #     account1 = Accounts1()
+                    #     account1.modified = account.modified
+                    #     account1.account_name = account.account_name
+                    #     account1.unavailable = account.unavailable
+                    #     account1.entity_url = account.entity_url
+                    #     account1.segment_source = account.segment_source
+                    #     account1.last_updated = account.last_updated
+                    #     account1.org_type_5 = account.org_type_5
+                    #     account1.org_type_4 = account.org_type_4
+                    #     account1.org_type_3 = account.org_type_3
+                    #     account1.org_type_2 = account.org_type_2
+                    #     account1.org_type_1 = account.org_type_1
+                    #     account1.sfdc_segmentation = account.sfdc_segmentation
+                    #     account1.ultimate_parent = account.ultimate_parent
+                    #     account1.oppertunity_type = account.oppertunity_type
+                    #     account1.exit_rate_usd = account.exit_rate_usd
+                    #     account1.exit_rate = account.exit_rate
+                    #     account1.country = account.country
+                    #     account1.address = account.address
+                    #     account1.a_number = account.a_number
+                    #     account1.account_status = account.account_status
+                    #     account1.save()
                     messages = "Data updated successfully."
 
 
