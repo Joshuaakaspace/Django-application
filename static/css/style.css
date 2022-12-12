@@ -115,7 +115,6 @@ hr{
 .btns{
     align-items: baseline;
     gap: 1rem;
-    box-shadow: 2px 5px #888888;
 }
 .btns > button{
     background: white;
