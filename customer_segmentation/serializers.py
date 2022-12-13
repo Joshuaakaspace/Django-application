@@ -24,4 +24,16 @@ class DataSerializers(serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super(DataSerializers, self).to_representation(instance)
         rep['last_updated'] = instance.last_updated.username if instance.last_updated else ""
+        # datentime = instance.modified
+        try:
+            a = str(instance.modified)
+            b = a.split(" ")
+            date = b[0].split("-")
+            date = date[2] + "-" + date[1] + "-" + date[0]
+            time = b[1][0:5]
+            date_time = time + "UTC  " + date
+        except:
+            date_time = ""
+        rep["modified"] = date_time
+        # print("datentime", datentime)
         return rep
