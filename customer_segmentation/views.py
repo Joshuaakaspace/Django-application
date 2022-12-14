@@ -378,8 +378,8 @@ def search_existing(request):
         no_account = False
         if request.POST.get("next"):
             account = Accounts1.objects.filter(a_number=a_number).first()
-            if not account:
-                account = Accounts2.objects.filter(a_number=a_number).first()
+            # if not account:
+            #     account = Accounts2.objects.filter(a_number=a_number).first()
             serializer = DataSerializers(account)
             dataJson = serializer.data
             print("in next")
