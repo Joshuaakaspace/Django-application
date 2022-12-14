@@ -19,22 +19,22 @@
 <!--    font-weight: 800; border-radius: 25px; padding: 3px; text-align:center" >Filters</div>-->
 
                     <div>
-      <input type="radio" checked="checked" name="radio" id="stone1" onclick="window.location='/updateunsegmented/4';">
+      <input type="radio" checked="checked" name="radio" id="stone11" onclick="window.location='/updateunsegmented/4';">
     <label >No Filter
     </label>
   </div>
 <div>
-    <input type="radio" checked="checked" name="radio" id="ndone2" onclick="window.location='/updateunsegmented/1';">
+    <input type="radio" checked="checked" name="radio" id="ndone21" onclick="window.location='/updateunsegmented/1';">
     <label >UP ACCS
     </label>
   </div>
 <div>
-    <input type="radio" checked="checked" name="radio" id="rdone3" onclick="window.location='/updateunsegmented/2';">
+    <input type="radio" checked="checked" name="radio" id="rdone31" onclick="window.location='/updateunsegmented/2';">
     <label >EXIT RATE ACCS
     </label>
   </div>
 <div>
-    <input type="radio" checked="checked" name="radio" id="thone4" onclick="window.location='/updateunsegmented/3';">
+    <input type="radio" checked="checked" name="radio" id="thone41" onclick="window.location='/updateunsegmented/3';">
     <label >OPTIES ACCS
     </label>
   </div>
@@ -173,34 +173,33 @@
             no_results_text: "Oops, nothing found!"
         })
         </script>
-        <script>
-        window.onload = ()=>{
-                       const upaccs = document.querySelector("#ndone2");
-            const exitrate = document.querySelector("#rdone3");
-            const optiesaccs = document.querySelector("#thone4");
-            const nofilter = document.querySelector("#stone1");
-            nofilter.checked = false;
-            upaccs.checked = false;
-            exitrate.checked = false;
-            optiesaccs.checked = false;
+        <script defer>
+            const upaccs1 = document.querySelector("#ndone21");
+            const exitrate1 = document.querySelector("#rdone31");
+            const optiesaccs1 = document.querySelector("#thone41");
+            const nofilter1 = document.querySelector("#stone11");
+            nofilter1.checked = false;
+            upaccs1.checked = false;
+            exitrate1.checked = false;
+            optiesaccs1.checked = false;
+            console.log(window.location.href.split("/").at(-1))
             if (window.location.href.split("/").at(-1).toString() == "1") {
-                    upaccs.checked = true;
+                    upaccs1.checked = true;
             } else if (
                 window.location.href.split("/").at(-1).toString() == "2"
             ) {
-                exitrate.checked = true;
+                exitrate1.checked = true;
             } else if (
                 window.location.href.split("/").at(-1).toString() == "3"
             ) {
-                optiesaccs.checked = true;
+                optiesaccs1.checked = true;
             }
             else if (
                 window.location.href.split("/").at(-1).toString() == "4"
             ) {
-                nofilter.checked = true;
+                nofilter1.checked = true;
             }
 
-         }
             // const ANumber = document.querySelector("#ANumber")
             // const Other = document.querySelector("#Other_chosen")
             // const Corporate = document.querySelector("#Corporate_chosen")
@@ -214,7 +213,7 @@
             // const AccountStatus = document.querySelector("#AccountStatus")
             // var data = JSON.parse("{{data|escapejs}}");
             // function GetData(){
-                
+
             //     // let Index = document.querySelector("#Index")
             //     // ANumber.value = data[parseInt(Index.innerText)].pk;
             //     // Address.value = data[parseInt(Index.innerText)].fields.address;
@@ -226,12 +225,12 @@
             //     // EntityURL.value = data[parseInt(Index.innerText)].fields.entity_url;
             //     // AccountStatus.value = data[parseInt(Index.innerText)].fields.account_status;
             //     // Index.innerText = parseInt(Index.innerText) + 1
-               
-                
-            
-            
 
-            // }              
+
+
+
+
+            // }
             // GetData();
             function submitdd(){
                 var Othertext = ""

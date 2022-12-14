@@ -174,9 +174,8 @@
             no_results_text: "Oops, nothing found!"
         })
         </script>
-        <script>
-            window.onload = ()=>{
-                       const upaccs = document.querySelector("#ndone2");
+        <script defer>
+            const upaccs = document.querySelector("#ndone2");
             const exitrate = document.querySelector("#rdone3");
             const optiesaccs = document.querySelector("#thone4");
             const nofilter = document.querySelector("#stone1");
@@ -201,7 +200,7 @@
                 nofilter.checked = true;
             }
 
-         }
+
             const Other = document.querySelector("#Other_chosen")
             const Corporate = document.querySelector("#Corporate_chosen")
             const Buyside = document.querySelector("#Buyside_chosen")
